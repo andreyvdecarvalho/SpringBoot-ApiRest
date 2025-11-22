@@ -1,10 +1,12 @@
 package med.oak.api.medico;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.oak.api.endereco.DadosEndereco;
 import med.oak.api.endereco.Endereco;
 
 @Table(name = "medicos")
@@ -34,5 +36,17 @@ public class Medico {
         this.crm = dadosMedico.crm();
         this.especialidade = dadosMedico.especialidade();
         this.endereco = new Endereco(dadosMedico.endereco());
+    }
+
+    public void atualizarDados(@Valid DadosAtualizarMedico dadosAtualiza) {
+        if (dadosAtualiza.nome() != null){
+            this.nome = dadosAtualiza.nome();
+        }
+        if(dadosAtualiza.telefone() !=null){
+            this.telefone = dadosAtualiza.telefone();
+        }
+        if(dadosAtualiza.endereco() != null){
+            this.endereco.atualizarEndereco(dadosAtualiza.endereco());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package med.oak.api.paciente;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,5 +32,17 @@ public class Paciente {
         this.telefone = dadosPaciente.telefone();
         this.cpf = dadosPaciente.cpf();
         this.endereco = new Endereco(dadosPaciente.endereco());
+    }
+
+    public void atualizarDados(@Valid DadosAtualizarPaciente atualizarPaciente) {
+        if(atualizarPaciente.nome() != null){
+            this.nome = atualizarPaciente.nome();
+        }
+        if(atualizarPaciente.telefone() != null){
+            this.telefone = atualizarPaciente.telefone();
+        }
+        if(atualizarPaciente.endereco() != null){
+            this.endereco.atualizarEndereco(atualizarPaciente.endereco());
+        }
     }
 }

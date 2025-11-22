@@ -1,10 +1,7 @@
 package med.oak.api.controller;
 
 import jakarta.validation.Valid;
-import med.oak.api.paciente.DadosCadastroPaciente;
-import med.oak.api.paciente.DadosListagemPaciente;
-import med.oak.api.paciente.Paciente;
-import med.oak.api.paciente.PacienteRepository;
+import med.oak.api.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +26,12 @@ public class PacienteController {
     public Page<DadosListagemPaciente> listar(@PageableDefault(sort = {"nome"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemPaciente::new);
     }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarPaciente atualizarPaciente){
+        var paciente = repository.getReferenceById(atualizarPaciente.id());
+        paciente.atualizarDados(atualizarPaciente);
+    }
+
 }

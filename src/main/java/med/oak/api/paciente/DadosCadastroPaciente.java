@@ -22,4 +22,10 @@ public record DadosCadastroPaciente(
         @Valid
         DadosEndereco endereco
 ) {
+    public record DadosAtualizarPaciente(
+            Long id,
+            String nome,
+            String telefone,
+            DadosEndereco endereco) {
+    }
 }
