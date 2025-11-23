@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.oak.api.endereco.DadosEndereco;
 import med.oak.api.endereco.Endereco;
 
 @Table(name = "medicos")
@@ -19,23 +18,26 @@ public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nome;
-    String email;
-    String telefone;
-    String crm;
+    private Long id;
+    private String nome;
+    private String email;
+    private String telefone;
+    private String crm;
     @Enumerated(EnumType.STRING)
-    Especialidade especialidade;
+    private Especialidade especialidade;
     @Embedded
-    Endereco endereco;
+    private Endereco endereco;
+    private boolean ativo;
 
     public Medico(DadosCadastroMedico dadosMedico) {
+        this.ativo = true;
         this.nome = dadosMedico.nome();
         this.email = dadosMedico.email();
         this. telefone = dadosMedico.telefone();
         this.crm = dadosMedico.crm();
         this.especialidade = dadosMedico.especialidade();
         this.endereco = new Endereco(dadosMedico.endereco());
+        this.ativo = dadosMedico.ativo();
     }
 
     public void atualizarDados(@Valid DadosAtualizarMedico dadosAtualiza) {
@@ -48,5 +50,9 @@ public class Medico {
         if(dadosAtualiza.endereco() != null){
             this.endereco.atualizarEndereco(dadosAtualiza.endereco());
         }
+    }
+
+    public void deletar() {
+       this.ativo = false;
     }
 }
