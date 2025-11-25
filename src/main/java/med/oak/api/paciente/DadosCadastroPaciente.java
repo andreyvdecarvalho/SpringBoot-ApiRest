@@ -20,8 +20,8 @@ public record DadosCadastroPaciente(
         String cpf,
         @NotNull
         @Valid
-        DadosEndereco endereco,
-        boolean ativo
+        DadosEndereco endereco
+
 ) {
     public record DadosAtualizarPaciente(
             Long id,

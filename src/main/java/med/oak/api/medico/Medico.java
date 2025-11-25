@@ -23,21 +23,21 @@ public class Medico {
     private String email;
     private String telefone;
     private String crm;
+    private boolean ativo;
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
     @Embedded
     private Endereco endereco;
-    private boolean ativo;
+
 
     public Medico(DadosCadastroMedico dadosMedico) {
         this.ativo = true;
         this.nome = dadosMedico.nome();
         this.email = dadosMedico.email();
-        this. telefone = dadosMedico.telefone();
+        this.telefone = dadosMedico.telefone();
         this.crm = dadosMedico.crm();
         this.especialidade = dadosMedico.especialidade();
         this.endereco = new Endereco(dadosMedico.endereco());
-        this.ativo = dadosMedico.ativo();
     }
 
     public void atualizarDados(@Valid DadosAtualizarMedico dadosAtualiza) {

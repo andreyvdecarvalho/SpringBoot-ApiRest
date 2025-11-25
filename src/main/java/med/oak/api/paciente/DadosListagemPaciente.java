@@ -4,10 +4,9 @@ public record DadosListagemPaciente(
         Long id,
         String nome,
         String email,
-        String cpf,
-        boolean ativo
+        String cpf
 ) {
     public DadosListagemPaciente(Paciente paciente) {
-        this(paciente.getId(), paciente.getNome(), paciente.getEmail(), paciente.getCpf(), paciente.isAtivo());
+        this(paciente.getId(), paciente.getNome(), paciente.getEmail(), paciente.getCpf());
     }
 }
