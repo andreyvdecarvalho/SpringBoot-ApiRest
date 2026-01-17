@@ -1,4 +1,4 @@
-package med.oak.api.paciente;
+package med.oak.api.domain.paciente;
 
 public record DadosListagemPaciente(
         Long id,

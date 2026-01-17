@@ -1,4 +1,4 @@
-package med.oak.api.endereco;
+package med.oak.api.domain.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

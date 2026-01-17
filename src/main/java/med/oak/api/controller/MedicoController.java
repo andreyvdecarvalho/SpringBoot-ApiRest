@@ -1,7 +1,7 @@
 package med.oak.api.controller;
 
 import jakarta.validation.Valid;
-import med.oak.api.medico.*;
+import med.oak.api.domain.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

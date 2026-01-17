@@ -1,6 +1,6 @@
-package med.oak.api.medico;
+package med.oak.api.domain.medico;
 
-import med.oak.api.endereco.Endereco;
+import med.oak.api.domain.endereco.Endereco;
 
 public record DadosDetalhadosMedico(Long id, String nome, String email, String telefone, String crm, Especialidade especialidade, Endereco endereco) {
 

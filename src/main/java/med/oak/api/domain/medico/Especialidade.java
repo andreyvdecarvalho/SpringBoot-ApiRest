@@ -1,4 +1,4 @@
-package med.oak.api.medico;
+package med.oak.api.domain.medico;
 
 public enum Especialidade {
     CARDIOLOGIA,

@@ -1,7 +1,7 @@
 package med.oak.api.controller;
 
 import jakarta.validation.Valid;
-import med.oak.api.paciente.*;
+import med.oak.api.domain.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +27,6 @@ public class PacienteController {
         var uri = uriBuilder.path("/{id}").buildAndExpand(paciente.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhadosPaciente(paciente));
-
     }
 
     @GetMapping
