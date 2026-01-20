@@ -3,6 +3,7 @@ package med.oak.api.controller;
 import jakarta.validation.Valid;
 import med.oak.api.domain.usuario.DadosAutenticacao;
 import med.oak.api.domain.usuario.Usuario;
+import med.oak.api.infra.security.DadosTokenJWT;
 import med.oak.api.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,11 @@ public class AuthenticartionController {
 
     @PostMapping
     public ResponseEntity executarLogin(@RequestBody @Valid DadosAutenticacao DadosAutenticacao){
-        var token = new UsernamePasswordAuthenticationToken(DadosAutenticacao.login(), DadosAutenticacao.senha());
-        var authenticate = authenticationManager.authenticate(token);
+        var autenticationToken = new UsernamePasswordAuthenticationToken(DadosAutenticacao.login(), DadosAutenticacao.senha());
+        var authenticate = authenticationManager.authenticate(autenticationToken);
 
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticate.getPrincipal()));
+        var tokenJWT = tokenService.gerarToken((Usuario) authenticate.getPrincipal());
+
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 }
