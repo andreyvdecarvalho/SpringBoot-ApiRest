@@ -1,4 +1,4 @@
 package med.oak.api.infra.security;
 
-public record DadosTokenJWT(String tokenT) {
+public record DadosTokenJWT(String token) {
 }
