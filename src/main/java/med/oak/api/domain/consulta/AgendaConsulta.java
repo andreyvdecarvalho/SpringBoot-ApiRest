@@ -1,0 +1,47 @@
+package med.oak.api.domain.consulta;
+
+import med.oak.api.domain.ValidacaoException;
+import med.oak.api.domain.medico.Medico;
+import med.oak.api.domain.medico.MedicoRepository;
+import med.oak.api.domain.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AgendaConsulta {
+    @Autowired
+    private MedicoRepository medicoRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private ConsultaRepository consultaRepository;
+
+    public void agendar(DadosAgendarConsulta dadosAgendarConsulta){
+        if (!pacienteRepository.existsById(dadosAgendarConsulta.idPaciente())){
+            throw new ValidacaoException("id do paciente informado não existe!");
+        }
+
+        if (dadosAgendarConsulta.idMedico() != null && !medicoRepository.existsById(dadosAgendarConsulta.idMedico())){
+            throw new ValidacaoException("id do médico informado não existe!");
+        }
+
+        var paciente = pacienteRepository.getReferenceById(dadosAgendarConsulta.idPaciente());
+        var medico = escolherMedico(dadosAgendarConsulta);
+        var consulta = new Consulta(null, medico, paciente, dadosAgendarConsulta.data());
+        consultaRepository.save(consulta);
+    }
+
+    private Medico escolherMedico(DadosAgendarConsulta dadosAgendarConsulta) {
+        if (dadosAgendarConsulta.idMedico() != null){
+            return  medicoRepository.getReferenceById(dadosAgendarConsulta.idMedico());
+        }
+
+        if (dadosAgendarConsulta.especialidade() == null){
+            throw new ValidacaoException("Especionalidade deve ser informada, quando não tem médico selecionado!");
+        }
+
+        return medicoRepository.escolherMedicoAleatorioLivreNaData(dadosAgendarConsulta. especialidade(), dadosAgendarConsulta.data());
+    }
+}

@@ -1,24 +1,42 @@
 package med.oak.api.controller;
 
 import jakarta.validation.Valid;
-import med.oak.api.domain.consulta.DadosAgendarConsulta;
-import med.oak.api.domain.consulta.DadosDetalhadosAgendamento;
+import med.oak.api.domain.ValidacaoException;
+import med.oak.api.domain.consulta.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/consultas")
 public class ConsultaController {
 
+    @Autowired
+    private AgendaConsulta agendaConsulta;
+
+    @Autowired
+    private CancelarConsulta cancelarConsulta;
+
     @PostMapping
     @Transactional
     public ResponseEntity agendar(@RequestBody @Valid DadosAgendarConsulta dadosAgendarConsulta){
-        System.out.println(dadosAgendarConsulta);
+
+        agendaConsulta.agendar(dadosAgendarConsulta);
 
         return ResponseEntity.ok(new DadosDetalhadosAgendamento(null, null, null, null));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity remover(@PathVariable DadosCancelamentoConsulta dadosCancelamentoConsulta){
+
+        cancelarConsulta.cancelar(dadosCancelamentoConsulta);
+
+        return ResponseEntity.noContent().build();
     }
 }
