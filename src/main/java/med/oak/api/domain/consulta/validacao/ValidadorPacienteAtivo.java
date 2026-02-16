@@ -1,0 +1,18 @@
+package med.oak.api.domain.consulta.validacao;
+
+import med.oak.api.domain.ValidacaoException;
+import med.oak.api.domain.consulta.DadosAgendarConsulta;
+import med.oak.api.domain.paciente.PacienteRepository;
+
+public class ValidadorPacienteAtivo {
+
+    PacienteRepository pacienteRepository;
+
+    public void validar(DadosAgendarConsulta dadosAgendarConsulta) {
+        var pacientesAtivo = pacienteRepository.findAtivoById(dadosAgendarConsulta.idPaciente());
+
+        if (!pacientesAtivo) {
+            throw new ValidacaoException("Paciente inativo!");
+        }
+    }
+}
