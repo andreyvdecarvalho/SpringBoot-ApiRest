@@ -2,10 +2,12 @@ package med.oak.api.domain.consulta.validacao;
 
 import med.oak.api.domain.ValidacaoException;
 import med.oak.api.domain.consulta.DadosAgendarConsulta;
+import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
 
-public class ValidadorHorarioFuncionamentoDaClinica {
+@Component
+public class ValidadorHorarioFuncionamentoDaClinica implements ValidadorAgendamentoConsulta {
 
     public void validar(DadosAgendarConsulta dadosAgendarConsulta) {
         var dataDaConsulta = dadosAgendarConsulta.data();

@@ -3,9 +3,13 @@ package med.oak.api.domain.consulta.validacao;
 import med.oak.api.domain.ValidacaoException;
 import med.oak.api.domain.consulta.ConsultaRepository;
 import med.oak.api.domain.consulta.DadosAgendarConsulta;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidadorConsultaMedico {
+@Component
+public class ValidadorConsultaMedico implements ValidadorAgendamentoConsulta {
 
+    @Autowired
     ConsultaRepository consultaRepository;
 
     public void validar(DadosAgendarConsulta dadosAgendarConsulta) {

@@ -3,8 +3,10 @@ package med.oak.api.domain.consulta.validacao;
 import med.oak.api.domain.ValidacaoException;
 import med.oak.api.domain.consulta.DadosAgendarConsulta;
 import med.oak.api.domain.medico.MedicoRepository;
+import org.springframework.stereotype.Component;
 
-public class ValidadorMedicoAtivo {
+@Component
+public class ValidadorMedicoAtivo implements ValidadorAgendamentoConsulta {
 
     MedicoRepository medicoRepository;
 
