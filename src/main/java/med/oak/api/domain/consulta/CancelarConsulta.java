@@ -13,12 +13,11 @@ public class CancelarConsulta {
     ConsultaRepository consultaRepository;
 
     public void cancelar(DadosCancelamentoConsulta dadosCancelamentoConsulta) {
-        var consulta = consultaRepository.getReferenceById(dadosCancelamentoConsulta.id());
-
-        if(dadosCancelamentoConsulta.motivo().isBlank()){
-            throw new ValidacaoException("Motivo precisa ser informado!");
+        if (!consultaRepository.existsById(dadosCancelamentoConsulta.idConsulta())){
+            throw new ValidacaoException("id da consulta informado não existe!");
         }
 
+        var consulta = consultaRepository.getReferenceById(dadosCancelamentoConsulta.idConsulta());
         if(LocalDateTime.now().plusHours(24).isBefore(consulta.getData())){
             consultaRepository.delete(consulta);
         } else {

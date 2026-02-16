@@ -32,8 +32,9 @@ public class ConsultaController {
         return ResponseEntity.ok(new DadosDetalhadosAgendamento(null, null, null, null));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity remover(@PathVariable DadosCancelamentoConsulta dadosCancelamentoConsulta){
+    @DeleteMapping
+    @Transactional
+    public ResponseEntity remover(@RequestBody @Valid DadosCancelamentoConsulta dadosCancelamentoConsulta){
 
         cancelarConsulta.cancelar(dadosCancelamentoConsulta);
 
