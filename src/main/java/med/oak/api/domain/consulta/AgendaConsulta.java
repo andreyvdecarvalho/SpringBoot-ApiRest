@@ -1,7 +1,7 @@
 package med.oak.api.domain.consulta;
 
 import med.oak.api.domain.ValidacaoException;
-import med.oak.api.domain.consulta.validacao.ValidadorAgendamentoConsulta;
+import med.oak.api.domain.consulta.validacao.agendamento.ValidadorAgendamentoConsulta;
 import med.oak.api.domain.medico.Medico;
 import med.oak.api.domain.medico.MedicoRepository;
 import med.oak.api.domain.paciente.PacienteRepository;

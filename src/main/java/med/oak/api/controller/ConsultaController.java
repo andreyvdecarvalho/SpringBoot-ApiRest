@@ -1,5 +1,6 @@
 package med.oak.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.oak.api.domain.ValidacaoException;
 import med.oak.api.domain.consulta.*;
@@ -15,6 +16,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired

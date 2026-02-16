@@ -1,4 +1,4 @@
-package med.oak.api.domain.consulta.validacao;
+package med.oak.api.domain.consulta.validacao.agendamento;
 
 import med.oak.api.domain.ValidacaoException;
 import med.oak.api.domain.consulta.ConsultaRepository;
@@ -13,7 +13,7 @@ public class ValidadorConsultaMedico implements ValidadorAgendamentoConsulta {
     ConsultaRepository consultaRepository;
 
     public void validar(DadosAgendarConsulta dadosAgendarConsulta) {
-        var consultaMedicoNoMesmoHorario = consultaRepository.existsByMedicoIdAndData(dadosAgendarConsulta.idMedico(), dadosAgendarConsulta.data());
+        var consultaMedicoNoMesmoHorario = consultaRepository.existsByMedicoIdAndDataAndMotivoCancelamentoIsNull(dadosAgendarConsulta.idMedico(), dadosAgendarConsulta.data());
 
         if (consultaMedicoNoMesmoHorario) {
             throw new ValidacaoException("Não é permitido o médico ter mais de uma consulta na mesmo hora do dia!");

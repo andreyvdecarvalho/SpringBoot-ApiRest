@@ -18,11 +18,12 @@ public class CancelarConsulta {
         }
 
         var consulta = consultaRepository.getReferenceById(dadosCancelamentoConsulta.idConsulta());
-        if(LocalDateTime.now().plusHours(24).isBefore(consulta.getData())){
-            consultaRepository.delete(consulta);
-        } else {
-            throw new ValidacaoException("Só podera ser cancelada com antecedencia minima de 24h!");
-        }
+        consulta.cancelar(dadosCancelamentoConsulta.motivo());
+//        if(LocalDateTime.now().plusHours(24).isBefore(consulta.getData())){
+//            consultaRepository.delete(consulta);
+//        } else {
+//            throw new ValidacaoException("Só podera ser cancelada com antecedencia minima de 24h!");
+//        }
 
     }
 }
