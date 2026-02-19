@@ -1,6 +1,6 @@
 # SpringBoot-ApiRest (OakMed API)
 
-API REST desenvolvida em **Java 17 + Spring Boot**, criada como projeto para demonstrar boas práticas de **back-end**, incluindo arquitetura em camadas, validações, persistência com JPA, versionamento de banco com Flyway e autenticação com JWT.
+API REST desenvolvida em **Java 17 + Spring Boot**, criada como projeto para demonstrar boas práticas de **back-end**, incluindo arquitetura em camadas, validações, persistência com JPA, testes automatizados e documentação Swagger, versionamento de banco com Flyway e autenticação com JWT.
 
 
 ## Objetivo do Projeto
@@ -24,6 +24,9 @@ Este projeto tem como objetivo demonstrar competências práticas em desenvolvim
 - JWT (Auth0 – java-jwt)
 - Flyway
 - MySQL
+- Swagger (OpenAPI)
+- JUnit 5
+- Mockito
 - Maven
 
 
@@ -64,7 +67,19 @@ O projeto segue uma arquitetura em camadas:
 - Tratamento centralizado de exceções
 - Paginação com `Pageable`
 
----
+### Testes Automatizados
+O projeto possui testes unitários utilizando:
+- JUnit 5
+- Mockito
+Cobertura aplicada em:
+- Camada de Controller
+- Camada de Repository
 
 ## Banco de Dados e Migrações
 O controle de versão do banco é feito com **Flyway**
+
+### Build do Projeto
+Projeto empacotado via Maven no IntelliJ
+1. Clonar o repositório:
+2. Configurar banco de dados no application.properties
+3. Executar.
